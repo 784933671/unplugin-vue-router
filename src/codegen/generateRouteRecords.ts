@@ -57,6 +57,17 @@ ${node
   // compute once since it's a getter
   const overrides = node.value.overrides
 
+  // TODO: add redirectToFirstChild option to avoid this TangTao
+
+  // 计算重定向到第一个子组件
+  let redirectCode = '';
+  if (options.redirectToFirstChild && node.children.size > 0) {
+    const sortedChildren = node.getSortedChildren()
+    if (sortedChildren.length > 0 && sortedChildren[0]) {
+      redirectCode = indentStr + `redirect: '${node.path}${sortedChildren[0].path}',\n`
+    }
+  }
+
   // path
   const routeRecord = `${startIndent}{
 ${indentStr}path: '${node.path}',

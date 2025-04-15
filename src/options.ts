@@ -225,7 +225,8 @@ export interface Options {
      * page component.
      */
     autoExportsDataLoaders?: string | string[]
-  }
+  },
+  redirectToFirstChild?:boolean
 }
 
 export const DEFAULT_OPTIONS = {
@@ -245,6 +246,7 @@ export const DEFAULT_OPTIONS = {
   },
   watch: !process.env.CI,
   experimental: {},
+  redirectToFirstChild:false
 } satisfies Options
 
 export interface ServerContext {
