@@ -64,7 +64,12 @@ ${node
   if (options.redirectToFirstChild && node.children.size > 0) {
     const sortedChildren = node.getSortedChildren()
     if (sortedChildren.length > 0 && sortedChildren[0]) {
-      redirectCode = indentStr + `redirect: '${node.path}${sortedChildren[0].path}',\n`
+      const childPath = sortedChildren[0].path
+      // 确保路径连接正确，避免重复的斜杠
+      const redirectPath = node.path === '/' 
+        ? `${node.path}${childPath.startsWith('/') ? childPath.substring(1) : childPath}`
+        : `${node.path}${childPath.startsWith('/') ? childPath : '/' + childPath}`
+      redirectCode = indentStr + `redirect: '${redirectPath}',\n`
     }
   }
 
@@ -76,7 +81,7 @@ ${indentStr}${
       ? `name: '${node.name}',`
       : `/* internal name: '${node.name}' */`
   }
-${
+${redirectCode}${
   // component
   indentStr
 }${
