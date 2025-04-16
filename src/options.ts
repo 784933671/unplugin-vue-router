@@ -226,7 +226,7 @@ export interface Options {
      */
     autoExportsDataLoaders?: string | string[]
   },
-  redirectToFirstChild?:boolean
+  redirectToFirstChild?:boolean//TODO TangTao添加的
 }
 
 export const DEFAULT_OPTIONS = {
@@ -246,7 +246,7 @@ export const DEFAULT_OPTIONS = {
   },
   watch: !process.env.CI,
   experimental: {},
-  redirectToFirstChild:false
+  redirectToFirstChild:false//TODO TangTao添加的
 } satisfies Options
 
 export interface ServerContext {
